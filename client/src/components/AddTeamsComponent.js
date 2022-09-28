@@ -17,6 +17,9 @@ export default function AddTeamsComponent({ getTeams }) {
     const text = form.input.trim();
     // Given date format: DD/MM
     const teamsInfo = text.split('\n');
+    
+    let fetchRequests = []
+    
     for (const team of teamsInfo) {
       const detailsArr = team.split(' ');
       const [teamName, teamRegDate, teamGroupNum] = detailsArr;
@@ -29,19 +32,20 @@ export default function AddTeamsComponent({ getTeams }) {
         groupNum: teamGroupNum,
       }
       
-      // TODO: Change to Promises.All()
-      await fetch("http://localhost:5000/team/add", {
+      const req = fetch("http://localhost:5000/team/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newTeam),
-      })
-      .catch(error => {
-        window.alert(error);
-        return;
       });
+      fetchRequests.push(req);
     }
+
+    await Promise.all(fetchRequests).catch(error => {
+      window.alert(error);
+      return;
+    });
 
     clearInput();
 
