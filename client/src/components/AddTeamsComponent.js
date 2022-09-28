@@ -3,11 +3,11 @@ import { useNavigate } from "react-router";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-export default function AddTeamsComponent() {
+export default function AddTeamsComponent({ getTeams }) {
   const [form, setForm] = useState({
     input: ""
   });
-
+  
   const navigate = useNavigate();
 
   // This function will handle the submission.
@@ -37,32 +37,40 @@ export default function AddTeamsComponent() {
         },
         body: JSON.stringify(newTeam),
       })
-        .catch(error => {
-          window.alert(error);
-          return;
-        });
+      .catch(error => {
+        window.alert(error);
+        return;
+      });
     }
 
-    navigate("/");
+    clearInput();
+
+    // update Frontend
+    getTeams();
   }
 
-  // This following section will display the form that takes the input from the user.
+  const clearInput = () => {
+    setForm({input: ""});
+  }
+
   return (
-    <Form>
-      <Form.Group>
-        <Form.Label>Enter Team Details</Form.Label>
-        <Form.Control as="textarea"
-          rows={3}
-          value={form.input}
-          onChange={(e) => setForm({ input: e.target.value })}
-        />
-      </Form.Group>
-      <Button
-        variant="primary"
-        type="submit"
-        onClick={handleSubmit}>
-        Submit
-      </Button>
-    </Form>
+    <>
+      <Form>
+        <Form.Group>
+          <Form.Label>Enter Team Details</Form.Label>
+          <Form.Control as="textarea"
+            rows={3}
+            value={form.input}
+            onChange={(e) => setForm({ input: e.target.value })}
+          />
+        </Form.Group>
+        <Button
+          variant="primary"
+          type="submit"
+          onClick={handleSubmit}>
+          Submit
+        </Button>
+      </Form>
+    </>
   );
 }
