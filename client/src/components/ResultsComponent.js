@@ -3,9 +3,6 @@ import InputDataComponent from "./InputDataComponent";
 import DisplayDataComponent from "./DisplayDataComponent";
 
 export default function ResultsComponent({ results, teams, handleResultDelete, deleteAllResults, getResults }) {
-  console.log(results);
-  console.log(teams);
-
   async function handleSubmit(e, input) {
     e.preventDefault();
 

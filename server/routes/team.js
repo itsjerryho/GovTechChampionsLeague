@@ -23,7 +23,6 @@ teamRoutes.route("/team").get(function (req, res) {
 });
 
 teamRoutes.route("/team/add").post(function (req, response) {
-  console.log('req:', req);
   let db_connect = dbo.getDb();
   let myobj = {
     name: req.body.name,
