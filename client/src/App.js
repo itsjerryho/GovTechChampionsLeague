@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
-
-// We use Route in order to define the different routes of our application
 import { Route, Routes } from "react-router-dom";
-
-// We import all the components we need in our app
 import Home from "./components/Home";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ResultsComponent from "./components/ResultsComponent";
 import NavbarComponent from "./components/NavbarComponent";
 import TeamsComponent from "./components/TeamsComponent";
-
+import LoadingComponent from "./components/LoadingComponent";
 
 const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [teams, setTeams] = useState([]);
   const [results, setResults] = useState([]);
 
@@ -20,6 +17,7 @@ const App = () => {
   useEffect(() => {
     getTeams();
     getResults();
+    setTimeout(() => setIsLoading(false), 500);
     return;
   }, []);
 
@@ -67,34 +65,40 @@ const App = () => {
     setTeams([]);
   }
 
+  const renderContent = (
+    <Routes>
+      <Route exact path="/" element={
+        <Home
+          teams={teams}
+          handleTeamDelete={deleteTeamById}
+          getTeams={getTeams}
+          deleteAllTeams={deleteAllTeams}
+          results={results}
+        />} />
+      <Route path="/results" element={
+        <ResultsComponent
+          results={results}
+          teams={teams}
+          getResults={getResults}
+          handleResultDelete={deleteResultById}
+          deleteAllResults={deleteAllResults}
+        />} />
+      <Route path="/teams" element={
+        <TeamsComponent
+          teams={teams}
+          handleTeamDelete={deleteTeamById}
+          deleteAllTeams={deleteAllTeams}
+          getTeams={getTeams} />
+      } />
+    </Routes>
+  )
+
   return (
     <div>
       <NavbarComponent />
-      <Routes>
-        <Route exact path="/" element={
-          <Home
-            teams={teams}
-            handleTeamDelete={deleteTeamById}
-            getTeams={getTeams}
-            deleteAllTeams={deleteAllTeams}
-            results={results}
-          />} />
-        <Route path="/results" element={
-          <ResultsComponent
-            results={results}
-            teams={teams}
-            getResults={getResults}
-            handleResultDelete={deleteResultById}
-            deleteAllResults={deleteAllResults}
-          />} />
-        <Route path="/teams" element={
-          <TeamsComponent
-            teams={teams}
-            handleTeamDelete={deleteTeamById}
-            deleteAllTeams={deleteAllTeams}
-            getTeams={getTeams} />
-        }/>
-      </Routes>
+      {isLoading ?
+        <LoadingComponent/> : renderContent
+      }
     </div>
   );
 };
