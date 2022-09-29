@@ -26,11 +26,11 @@ resultRoutes.route("/result/add").post(function (req, response) {
   console.log('req:', req);
   let db_connect = dbo.getDb();
   let myobj = {
-    firstTeam: req.body.firstTeam,
-    secondTeam: req.body.secondTeam,
-    firstTeamGoals: req.body.firstTeamGoals,
-    secondTeamGoals: req.body.secondTeamGoals,
-    group: req.body.group,
+    FirstTeam: req.body.firstTeam,
+    SecondTeam: req.body.secondTeam,
+    FirstTeamGoals: req.body.firstTeamGoals,
+    SecondTeamGoals: req.body.secondTeamGoals,
+    Group: req.body.group,
   };
   db_connect.collection("results").insertOne(myobj, function (err, res) {
     if (err) throw err;
