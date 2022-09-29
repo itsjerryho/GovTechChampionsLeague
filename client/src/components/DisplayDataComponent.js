@@ -2,19 +2,30 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+import { capitalize } from "../utils/common";
+import '../styles/DisplayDataComponent.css'
 
-export default function DisplayDataComponent({ data, handleDelete, handleDeleteAll, getTableHeaders }) {
+export default function DisplayDataComponent({ data, contentName, handleDelete, handleDeleteAll, getTableHeaders }) {
   const headers = getTableHeaders();
 
   return (
     <>
-      <Table striped>
+      {data.length > 0 &&
+        <Navbar bg="primary" variant="dark">
+          <Container>
+            <Navbar.Brand>{`List of ${contentName} Entries`}</Navbar.Brand>
+          </Container>
+        </Navbar>
+      }
+      <Table striped hover>
         <thead>
           <tr>
             {headers && headers.map((item) => (
-              <th>{item}</th>
+              <th>{capitalize(item)}</th>
             ))}
-            {headers && <th><Button variant="secondary" onClick={handleDeleteAll}>Delete All</Button></th>}
+            {headers && <th className="deleteButton"><Button variant="secondary" onClick={handleDeleteAll}>Delete All</Button></th>}
           </tr>
         </thead>
         <tbody>
@@ -24,7 +35,7 @@ export default function DisplayDataComponent({ data, handleDelete, handleDeleteA
                 {dataObj && Object.keys(dataObj).map((key) => (
                   (key != '_id') && <td>{dataObj[key]}</td>
                 ))}
-                <td><Button onClick={() => handleDelete(dataObj["_id"])}>Delete</Button></td>
+                <td className="deleteButton"><Button onClick={() => handleDelete(dataObj["_id"])}>Delete</Button></td>
               </tr>
             )
           )}

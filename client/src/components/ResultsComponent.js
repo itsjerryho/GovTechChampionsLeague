@@ -18,15 +18,15 @@ export default function ResultsComponent({ results, teams, handleResultDelete, d
     for (const match of matchResults) {
       const detailsArr = match.split(' ');
       const [firstTeam, secondTeam, firstTeamGoals, secondTeamGoals] = detailsArr;
-
+      
       const newMatchResult = {
         firstTeam: firstTeam,
         secondTeam: secondTeam,
         firstTeamGoals: firstTeamGoals,
         secondTeamGoals: secondTeamGoals,
         group: teams.find(team => team.name === firstTeam || team.name === secondTeam)["groupNum"],
-
       }
+
 
       const req = fetch("http://localhost:5000/result/add", {
         method: "POST",
@@ -87,7 +87,7 @@ export default function ResultsComponent({ results, teams, handleResultDelete, d
   return (
     <>
       <InputDataComponent keyword={"Result"} textPlaceHolder="<Team A name> <Team B name> <Team A goals scored> <Team B goals scored> ..." handleSubmit={handleSubmit} />
-      <DisplayDataComponent data={results} handleDelete={handleDelete} handleDeleteAll={handleDeleteAll} getTableHeaders={getTableHeaders} />
+      <DisplayDataComponent data={results} contentName={"Team Results"} handleDelete={handleDelete} handleDeleteAll={handleDeleteAll} getTableHeaders={getTableHeaders} />
     </>
   );
 }

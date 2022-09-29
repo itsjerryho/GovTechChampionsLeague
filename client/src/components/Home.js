@@ -4,26 +4,44 @@ import RankingsComponent from "./RankingsComponent";
 import TeamsComponent from './TeamsComponent';
 
 export default function Home({ teams, results, handleTeamDelete, deleteAllTeams, getTeams }) {
-  let alertMessage = "";
+  let alertMissingTeamsMessage = "";
+  let alertMissingResultsMessage = "";
 
-  const createAlertMessage = () => {
+  const createMissingTeamsAlertMessage = () => {
     if (teams.length < 12) {
-      alertMessage = `Sorry! We are unable to show you the current rankings as you have yet to enter 12 teams. You have only entered ${teams.length} teams so far.`
+      alertMissingTeamsMessage = `Sorry! We are unable to show you the current rankings as you have yet to enter 12 teams. You have only entered ${teams.length} teams so far.`
     } else if (teams.length > 12) {
-      alertMessage = `Sorry! We are unable to show you the current rankings as you have entered more than 12 teams. Please delete ${teams.length - 12} teams.`
+      alertMissingTeamsMessage = `Sorry! We are unable to show you the current rankings as you have entered more than 12 teams. Please delete ${teams.length - 12} teams.`
     }
   }
 
-  createAlertMessage();
+  const createMissingResultsAlertMessage = () => {
+    if (!results.length) {
+      alertMissingResultsMessage = "Enter team results in results page to view the updated ranking board."
+    }
+  }
+
+  createMissingTeamsAlertMessage();
+  createMissingResultsAlertMessage();
 
   if (teams.length !== 12) {
     return (
       <>
-        <Alert key={'info'} variant={'info'}>
-          {alertMessage}
+        <Alert dismissible key={'info'} variant={'info'}>
+          {alertMissingTeamsMessage}
         </Alert>
         <TeamsComponent teams={teams} handleTeamDelete={handleTeamDelete} deleteAllTeams={deleteAllTeams} getTeams={getTeams} />
       </>)
   }
-  return <RankingsComponent teams={teams} results={results} />;
+  return (
+    <>
+      {alertMissingResultsMessage
+        &&
+        <Alert dismissible key={'info'} variant={'info'}>
+          {alertMissingResultsMessage}
+        </Alert>
+      }
+      <RankingsComponent teams={teams} results={results} />
+    </>
+  )
 }

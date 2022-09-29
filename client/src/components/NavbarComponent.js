@@ -7,7 +7,7 @@ export default function NavbarComponent() {
  return (
   <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand>GovTech Champions League</Navbar.Brand>
+          <Navbar.Brand>GovTech Champions League 🏆</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/results">Results</Nav.Link>

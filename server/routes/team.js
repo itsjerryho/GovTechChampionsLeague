@@ -26,9 +26,9 @@ teamRoutes.route("/team/add").post(function (req, response) {
   console.log('req:', req);
   let db_connect = dbo.getDb();
   let myobj = {
-    Name: req.body.name,
-    GroupNum: req.body.groupNum,
-    RegistrationDate: req.body.registrationDate,
+    name: req.body.name,
+    groupNumber: req.body.groupNum,
+    registrationDate: req.body.registrationDate,
   };
   db_connect.collection("teams").insertOne(myobj, function (err, res) {
     if (err) throw err;
