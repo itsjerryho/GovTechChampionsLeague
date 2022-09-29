@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-export default function InputDataComponent({ keyword, handleSubmit }) {
+export default function InputDataComponent({ keyword, textPlaceHolder, handleSubmit }) {
   const [form, setForm] = useState({
     input: ""
   });
@@ -26,6 +26,7 @@ export default function InputDataComponent({ keyword, handleSubmit }) {
         <Form.Group>
           <Form.Label>Enter {keyword} Details</Form.Label>
           <Form.Control as="textarea"
+            placeholder={textPlaceHolder}
             rows={3}
             value={form.input}
             onChange={(e) => setForm({ input: e.target.value })}

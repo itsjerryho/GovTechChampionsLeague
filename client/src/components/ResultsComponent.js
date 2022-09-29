@@ -12,9 +12,9 @@ export default function ResultsComponent({ results, teams, handleResultDelete, d
     const text = input.trim();
     // Given date format: DD/MM
     const matchResults = text.split('\n');
-    
+
     let fetchRequests = []
-    
+
     for (const match of matchResults) {
       const detailsArr = match.split(' ');
       const [firstTeam, secondTeam, firstTeamGoals, secondTeamGoals] = detailsArr;
@@ -27,7 +27,7 @@ export default function ResultsComponent({ results, teams, handleResultDelete, d
         group: teams.find(team => team.name == firstTeam || team.name == secondTeam)["groupNum"],
 
       }
-      
+
       const req = fetch("http://localhost:5000/result/add", {
         method: "POST",
         headers: {
@@ -48,7 +48,7 @@ export default function ResultsComponent({ results, teams, handleResultDelete, d
 
     return true;
   }
-  
+
   async function handleDelete(resultId) {
     // Update Database
     await fetch(`http://localhost:5000/result/${resultId}`, {
@@ -75,7 +75,7 @@ export default function ResultsComponent({ results, teams, handleResultDelete, d
     deleteAllResults();
 
     return;
-  }  
+  }
 
   const getTableHeaders = () => {
     let headers;
@@ -88,8 +88,8 @@ export default function ResultsComponent({ results, teams, handleResultDelete, d
 
   return (
     <>
-        <InputDataComponent keyword={"Result"} handleSubmit={handleSubmit}/>
-        <DisplayDataComponent data={results} handleDelete={handleDelete} handleDeleteAll={handleDeleteAll} getTableHeaders={getTableHeaders}/>
+      <InputDataComponent keyword={"Result"} textPlaceHolder="<Team A name> <Team B name> <Team A goals scored> <Team B goals scored> ..." handleSubmit={handleSubmit} />
+      <DisplayDataComponent data={results} handleDelete={handleDelete} handleDeleteAll={handleDeleteAll} getTableHeaders={getTableHeaders} />
     </>
   );
 }

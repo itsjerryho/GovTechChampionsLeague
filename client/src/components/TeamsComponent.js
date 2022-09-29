@@ -84,7 +84,7 @@ export default function TeamsComponent({ teams, handleTeamDelete, deleteAllTeams
 
   return (
     <>
-        <InputDataComponent keyword="Team" handleSubmit={handleSubmit}/>
+        <InputDataComponent keyword="Team" textPlaceHolder="<Team A name> <Team A registration date in DD/MM> <Team A group number> ..." handleSubmit={handleSubmit}/>
         <DisplayDataComponent data={teams} handleDelete={handleDelete} handleDeleteAll={handleDeleteAll} getTableHeaders={getTableHeaders}/>
     </>
   );
