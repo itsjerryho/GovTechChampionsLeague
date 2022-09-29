@@ -35,9 +35,11 @@ export const thirdMetric = (x, y) => {
 }
 
 export const forthMetric = (x, y) => {
-  if (parseInt(x["registrationDate"]) > (parseInt(y["registrationDate"]))) {
+  let xDate = new Date(x["registrationDate"]);
+  let yDate = new Date(y["registrationDate"]);
+  if (xDate > yDate) {
     return 1;
-  } else if (parseInt(x["registrationDate"]) < (parseInt(y["registrationDate"]))) {
+  } else if (xDate < yDate) {
     return -1;
   } else {
     return 0;
