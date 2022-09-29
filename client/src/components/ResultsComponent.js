@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import InputDataComponent from "./InputDataComponent";
 import DisplayDataComponent from "./DisplayDataComponent";
 
@@ -24,7 +24,7 @@ export default function ResultsComponent({ results, teams, handleResultDelete, d
         secondTeam: secondTeam,
         firstTeamGoals: firstTeamGoals,
         secondTeamGoals: secondTeamGoals,
-        group: teams.find(team => team.name == firstTeam || team.name == secondTeam)["groupNum"],
+        group: teams.find(team => team.name === firstTeam || team.name === secondTeam)["groupNum"],
 
       }
 
@@ -50,7 +50,6 @@ export default function ResultsComponent({ results, teams, handleResultDelete, d
   }
 
   async function handleDelete(resultId) {
-    // Update Database
     await fetch(`http://localhost:5000/result/${resultId}`, {
       method: "DELETE"
     }).catch(error => {
@@ -64,7 +63,6 @@ export default function ResultsComponent({ results, teams, handleResultDelete, d
   }
 
   async function handleDeleteAll() {
-    // Update Database
     await fetch(`http://localhost:5000/result/`, {
       method: "DELETE"
     }).catch(error => {
@@ -81,7 +79,7 @@ export default function ResultsComponent({ results, teams, handleResultDelete, d
     let headers;
     if (results.length > 0) {
       const resultObj = results[0];
-      headers = Object.keys(resultObj).filter(item => item != '_id');
+      headers = Object.keys(resultObj).filter(item => item !== '_id');
     }
     return headers
   }

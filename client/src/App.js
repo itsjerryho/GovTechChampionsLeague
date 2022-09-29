@@ -50,12 +50,12 @@ const App = () => {
   }
 
   const deleteTeamById = (id) => {
-    const filteredTeams = teams.filter((team) => team._id != id);
+    const filteredTeams = teams.filter((team) => team._id !== id);
     setTeams(filteredTeams);
   }
 
   const deleteResultById = (id) => {
-    const filteredResults = results.filter((res) => res._id != id);
+    const filteredResults = results.filter((res) => res._id !== id);
     setResults(filteredResults);
   }
 
@@ -79,7 +79,6 @@ const App = () => {
             deleteAllTeams={deleteAllTeams}
             results={results}
           />} />
-        {/* <Route path="/edit/:id" element={<Edit />} /> */}
         <Route path="/results" element={
           <ResultsComponent
             results={results}

@@ -1,13 +1,8 @@
-import React, { useState } from "react";
-import InputDataComponent from "./InputDataComponent";
-import DisplayDataComponent from "./DisplayDataComponent";
+import React from "react";
 import { firstMetric, secondMetric, thirdMetric, forthMetric } from "../utils/rankingMetrics";
 import ScoreboardComponent from "./ScoreboardComponent";
 
 export default function RankingsComponent({ teams, results }) {
-  // console.log(teams);
-  // console.log(results);
-
   let group1teams = [];
   let group2teams = [];
 
@@ -15,8 +10,8 @@ export default function RankingsComponent({ teams, results }) {
     for (const res of results) {
       const [firstTeam, secondTeam] = [res.firstTeam, res.secondTeam]
 
-      let firstTeamRef = teams.find(team => team.name == firstTeam)
-      let secondTeamRef = teams.find(team => team.name == secondTeam)
+      let firstTeamRef = teams.find(team => team.name === firstTeam)
+      let secondTeamRef = teams.find(team => team.name === secondTeam)
 
       if (res.firstTeamGoals > res.secondTeamGoals) {
         // first team won
@@ -38,8 +33,8 @@ export default function RankingsComponent({ teams, results }) {
   }
 
   const calculateRanking = () => {
-    group1teams = teams.filter(team => team.groupNum == "1");
-    group2teams = teams.filter(team => team.groupNum == "2");
+    group1teams = teams.filter(team => team.groupNum === "1");
+    group2teams = teams.filter(team => team.groupNum === "2");
 
     const teamsArr = [group1teams, group2teams];
     teamsArr.forEach(team => {
@@ -49,7 +44,7 @@ export default function RankingsComponent({ teams, results }) {
 
         for (const metric of metrics) {
           const res = metric(x, y);
-          if (res != 0) {
+          if (res !== 0) {
             return -res;
           }
         }

@@ -14,7 +14,7 @@ export default function DisplayDataComponent({ data, handleDelete, handleDeleteA
             {headers && headers.map((item) => (
               <th>{item}</th>
             ))}
-            {headers && <th><Button onClick={handleDeleteAll}>Delete All</Button></th>}
+            {headers && <th><Button variant="secondary" onClick={handleDeleteAll}>Delete All</Button></th>}
           </tr>
         </thead>
         <tbody>
@@ -33,8 +33,3 @@ export default function DisplayDataComponent({ data, handleDelete, handleDeleteA
     </>
   );
 }
-
-
-// <td>{team["name"]}</td>
-// <td>{team["groupNum"]}</td>
-// <td>{team["registrationDate"]}</td>

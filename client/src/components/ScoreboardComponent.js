@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import React from "react";
 import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 
@@ -10,7 +8,7 @@ export default function ScoreboardComponent({ teams }) {
   let groupNum;
 
   const getRowHeaders = () => {
-    headers.push("name");
+    headers.push("Name");
     if (teams.length) {
       let team = teams[0]
       for (const key of Object.keys(team["matchStats"])) {
@@ -31,9 +29,9 @@ export default function ScoreboardComponent({ teams }) {
   return (
     <>
       <Navbar bg="light">
-        {/* <Container> */}
-          <Navbar.Brand>{groupNum && `Group${groupNum}` || "Error getting group number"}</Navbar.Brand>
-        {/* </Container> */}
+        <Container>
+          <Navbar.Brand>{(groupNum && `Group ${groupNum}`) || "Error getting group number"}</Navbar.Brand>
+        </Container>
       </Navbar>
       <Table striped>
         <thead>
