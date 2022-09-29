@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import InputDataComponent from "./InputDataComponent";
 import DisplayDataComponent from "./DisplayDataComponent";
 
-export default function TeamsComponent({ teams, handleTeamDelete, getTeams }) {
+export default function TeamsComponent({ teams, handleTeamDelete, deleteAllTeams, getTeams }) {
   async function handleSubmit(e, input) {
     e.preventDefault();
 
@@ -59,6 +59,20 @@ export default function TeamsComponent({ teams, handleTeamDelete, getTeams }) {
     return;
   }
 
+  async function handleDeleteAll() {
+    // Update Database
+    await fetch(`http://localhost:5000/team/`, {
+      method: "DELETE"
+    }).catch(error => {
+      window.alert('Failed to delete all teamRecords');
+      return;
+    });
+
+    deleteAllTeams();
+
+    return;
+  }  
+
   const getTableHeaders = () => {
     let headers;
     if (teams.length > 0) {
@@ -71,7 +85,7 @@ export default function TeamsComponent({ teams, handleTeamDelete, getTeams }) {
   return (
     <>
         <InputDataComponent keyword="Team" handleSubmit={handleSubmit}/>
-        <DisplayDataComponent data={teams} handleDelete={handleDelete} getTableHeaders={getTableHeaders}/>
+        <DisplayDataComponent data={teams} handleDelete={handleDelete} handleDeleteAll={handleDeleteAll} getTableHeaders={getTableHeaders}/>
     </>
   );
 }

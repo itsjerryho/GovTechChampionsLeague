@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
-export default function DisplayDataComponent({ data, handleDelete, getTableHeaders }) {
+export default function DisplayDataComponent({ data, handleDelete, handleDeleteAll, getTableHeaders }) {
   const headers = getTableHeaders();
 
   return (
@@ -14,6 +14,7 @@ export default function DisplayDataComponent({ data, handleDelete, getTableHeade
             {headers && headers.map((item) => (
               <th>{item}</th>
             ))}
+            {headers && <th><Button onClick={handleDeleteAll}>Delete All</Button></th>}
           </tr>
         </thead>
         <tbody>
@@ -37,4 +38,3 @@ export default function DisplayDataComponent({ data, handleDelete, getTableHeade
 // <td>{team["name"]}</td>
 // <td>{team["groupNum"]}</td>
 // <td>{team["registrationDate"]}</td>
-              
