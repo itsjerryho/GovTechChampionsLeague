@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import InputDataComponent from "./InputDataComponent";
 import DisplayDataComponent from "./DisplayDataComponent";
 import { firstMetric, secondMetric, thirdMetric, forthMetric } from "../utils/rankingMetrics";
+import ScoreboardComponent from "./ScoreboardComponent";
 
 export default function RankingsComponent({ teams, results }) {
   // console.log(teams);
@@ -74,6 +75,12 @@ export default function RankingsComponent({ teams, results }) {
 
   return (
     <>
+      <ScoreboardComponent
+        teams={group1teams}
+      />
+      <ScoreboardComponent
+        teams={group2teams}
+      />
     </>
   );
 }
