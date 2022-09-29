@@ -8,6 +8,8 @@ import Home from "./components/Home";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ResultsComponent from "./components/ResultsComponent";
+import NavbarComponent from "./components/NavbarComponent";
+import TeamsComponent from "./components/TeamsComponent";
 
 
 const App = () => {
@@ -67,7 +69,7 @@ const App = () => {
 
   return (
     <div>
-      {/* <Navbar /> */}
+      <NavbarComponent />
       <Routes>
         <Route exact path="/" element={
           <Home
@@ -75,16 +77,24 @@ const App = () => {
             handleTeamDelete={deleteTeamById}
             getTeams={getTeams}
             deleteAllTeams={deleteAllTeams}
+            results={results}
           />} />
         {/* <Route path="/edit/:id" element={<Edit />} /> */}
         <Route path="/results" element={
           <ResultsComponent
-            results={results} 
+            results={results}
             teams={teams}
             getResults={getResults}
             handleResultDelete={deleteResultById}
             deleteAllResults={deleteAllResults}
-            />} />
+          />} />
+        <Route path="/teams" element={
+          <TeamsComponent
+            teams={teams}
+            handleTeamDelete={deleteTeamById}
+            deleteAllTeams={deleteAllTeams}
+            getTeams={getTeams} />
+        }/>
       </Routes>
     </div>
   );
