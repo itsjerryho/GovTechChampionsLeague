@@ -33,8 +33,8 @@ export default function RankingsComponent({ teams, results }) {
   }
 
   const calculateRanking = () => {
-    group1teams = teams.filter(team => team.groupNum === "1");
-    group2teams = teams.filter(team => team.groupNum === "2");
+    group1teams = teams.filter(team => team.groupNumber === "1");
+    group2teams = teams.filter(team => team.groupNumber === "2");
 
     const teamsArr = [group1teams, group2teams];
     teamsArr.forEach(team => {

@@ -6,7 +6,7 @@ import { capitalize } from "../utils/common";
 
 export default function ScoreboardComponent({ teams }) {
   let headers = [];
-  let groupNum;
+  let groupNumber;
 
   const getRowHeaders = () => {
     headers.push("name");
@@ -20,7 +20,7 @@ export default function ScoreboardComponent({ teams }) {
 
   const getGroupNum = () => {
     if (teams.length) {
-      groupNum = teams[0]["groupNum"];
+      groupNumber = teams[0]["groupNumber"];
     }
   }
 
@@ -31,7 +31,7 @@ export default function ScoreboardComponent({ teams }) {
     <>
       <Navbar bg="light">
         <Container>
-          <Navbar.Brand>{(groupNum && `Group ${groupNum}`) || "Error getting group number"}</Navbar.Brand>
+          <Navbar.Brand>{(groupNumber && `Group ${groupNumber}`) || "Error getting group number"}</Navbar.Brand>
         </Container>
       </Navbar>
       <Table striped>

@@ -21,7 +21,7 @@ export default function ResultsComponent({ results, teams, handleResultDelete, d
         secondTeam: secondTeam,
         firstTeamGoals: firstTeamGoals,
         secondTeamGoals: secondTeamGoals,
-        group: teams.find(team => team.name === firstTeam || team.name === secondTeam)["groupNum"],
+        group: teams.find(team => team.name === firstTeam || team.name === secondTeam)["groupNumber"],
       }
 
 
