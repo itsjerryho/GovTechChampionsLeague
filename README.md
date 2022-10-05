@@ -25,6 +25,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Assumptions made for this project
 - For simplicity, I have assumed that the 12 teams competing in this football championship have *distinct names*.
 - Due to time constraints, I have also assumed that the input provided for `Team Information` and `Match Results` are correct and are given in the form as shown in the test cases.
+- I have assumed that all the team information (of the 12 teams) would be added first before the match results are added.
 
 ## Tech Stack Used
 - MongoDB
